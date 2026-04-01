@@ -1,0 +1,22 @@
+replicaCount: 2
+
+image:
+  repository: 348419248552.dkr.ecr.us-east-1.amazonaws.com/kubernetics/backend   # ⬅ USER MUST UPDATE
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 3000
+
+resources:
+  limits:   { cpu: 250m, memory: 256Mi }
+  requests: { cpu: 100m, memory: 128Mi }
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilization: 70
+
+redis:
+  host: redis-service
